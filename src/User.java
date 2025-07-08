@@ -48,9 +48,9 @@ public class User {
         if (book.isAvailable()) {
             borrowedBookList.add(book);
             book.setAvailable(false);
-            System.out.println("Muon sach thanh cong");
+            System.out.println("Successfully borrowed a book");
         } else {
-            System.out.println("Sach khong co san");
+            System.out.println("Books are not available");
         }
     }
 
@@ -59,11 +59,11 @@ public class User {
             if (book.getId().equals(book.getId())) {
                 borrowedBookList.remove(book);
                 book.setAvailable(true);
-                System.out.println("Tra sach thanh cong");
+                System.out.println("Successfully returned the book");
                 return;
             }
         }
-        System.out.println("Khong co sach de tra");
+        System.out.println("There is no book to return.");
     }
 
     @Override

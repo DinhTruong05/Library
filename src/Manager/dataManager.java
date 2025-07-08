@@ -18,57 +18,57 @@ public class dataManager {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void addBook() {
-        System.out.println("Nhập id sách");
+        System.out.println("Input ID book");
         String id = scanner.nextLine();
-        System.out.println("Nhập tên sách");
+        System.out.println("Input title");
         String title = scanner.nextLine();
-        System.out.println("Nhập tác giả");
+        System.out.println("Input author");
         String author = scanner.nextLine();
-        System.out.println("Nhập loại sách");
+        System.out.println("Input category");
         String category = scanner.nextLine();
-        System.out.println("Nhập trạng thái sách");
+        System.out.println("Input available");
         boolean available = scanner.nextLine().equals("true");
         Book book = new Book(id, title, author, category, available);
         bookList.add(book);
-        System.out.println("Nhập sách thành công ");
+        System.out.println("Input Done ");
     }
 
     public static void removeBook() {
-        System.out.println("Nhập Id sách cần xóa");
+        System.out.println("Input Id book to remove");
         String id = scanner.nextLine();
         Book book = findBook(id);
         if (book == null) {
-            System.out.println("Id sai hoặc sách không tồn tại ");
+            System.out.println("Wrong Id or book not found ");
             return;
         }
         bookList.remove(book);
-        System.out.println("Xoa thanh cong");
+        System.out.println("Remove Done");
 
     }
 
     public static void updateBook() {
-        System.out.println(" Nhập Id sách cần update");
+        System.out.println("Input Id book to update");
         String id = scanner.nextLine();
         Book book = findBook(id);
         if (book == null) {
-            System.out.println("Id sai hoặc sách không tồn tại  ");
+            System.out.println("Wrong Id or book not found  ");
             return;
         }
 
 
-        System.out.println(" Tiêu đề mới : ");
+        System.out.println(" New title : ");
         book.setTitle(scanner.nextLine());
-        System.out.println(" Tác giả mới : ");
+        System.out.println(" New author : ");
         book.setAuthor(scanner.nextLine());
-        System.out.println(" Thể loại mới : ");
+        System.out.println(" New category : ");
         book.setCategory(scanner.nextLine());
 
-        System.out.println(" Update thành công");
+        System.out.println(" Update done!");
 
     }
 
     public static void searchBook() {
-        System.out.println(" Nhập tiêu đề hoặc tên tác giả : ");
+        System.out.println(" Input title or author : ");
         String title = scanner.nextLine().toLowerCase();
         boolean found = false;
         for (Book book : bookList) {
@@ -78,29 +78,29 @@ public class dataManager {
                 found = true;
             }
         }
-        if (!found) System.out.println(" Không tìm thấy sách phù hợp!!");
+        if (!found) System.out.println(" Not found !!");
 
     }
 
     public static void registerUser() {
-        System.out.print("ID người dùng: ");
+        System.out.print("User Id: ");
         String id = scanner.nextLine();
-        System.out.print("Tên: ");
+        System.out.print("Name: ");
         String name = scanner.nextLine();
         System.out.print("Email: ");
         String email = scanner.nextLine();
 
         userList.add(new User(id, name, email));
-        System.out.println("Đăng ký thành công.");
+        System.out.println("Register user done.");
     }
 
     public static void borrowBook() {
-        System.out.println(" Nhập Id người dùng : ");
+        System.out.println(" Input ID User : ");
         String userId = scanner.nextLine();
         User user = findUser(userId);
         if (user == null) return;
 
-        System.out.println(" Nhập Id sách muốn mượn : ");
+        System.out.println(" Input ID Book to borrow : ");
         String bookId = scanner.nextLine();
         Book book = findBook(bookId);
         if (book == null) return;
@@ -110,23 +110,23 @@ public class dataManager {
 
 
     public static void returnedBook() {
-        System.out.println("Id người dùng: ");
+        System.out.println("ID User: ");
         String userId = scanner.nextLine();
         User user = findUser(userId);
         if (user == null) return;
 
-        System.out.println("Id sách: ");
+        System.out.println("ID Book to return: ");
         String bookId = scanner.nextLine();
         user.removeBorrowedBook(bookId);
     }
 
     public static void displayBookList() {
-        System.out.println("\nDANH SÁCH SÁCH:");
+        System.out.println("\nLIST BOOK:");
         for (Book book : bookList) {
             System.out.println(book);
         }
 
-        System.out.println("\nDANH SÁCH USER:");
+        System.out.println("\nLIST USER:");
         for (User user : userList) {
             System.out.println(user);
         }
@@ -135,8 +135,8 @@ public class dataManager {
     public static void showStatistics() {
         long borrowed = bookList.stream().filter(b -> !b.isAvailable()).count();
         System.out.println("\nThống kê");
-        System.out.println("Tổng số sách: " + bookList.size());
-        System.out.println(" Số sách đã được mượn: " + borrowed);
+        System.out.println("Total book: " + bookList.size());
+        System.out.println(" Total book borrowed: " + borrowed);
     }
 
     public static void saveToFile() {
@@ -149,7 +149,7 @@ public class dataManager {
                         + b.isAvailable());
             }
         } catch (Exception e) {
-            System.out.println("Lỗi ghi file sách");
+            System.out.println("Error input file book");
         }
 
         try (PrintWriter bw = new PrintWriter("file/user.txt")) {
@@ -159,9 +159,9 @@ public class dataManager {
                         + u.getEmail());
             }
         } catch (Exception e) {
-            System.out.println("Lỗi ghi file user");
+            System.out.println("Error input file user");
         }
-        System.out.println(" Đã lưu dữ liệu ");
+        System.out.println(" Export file done ");
     }
 
 
@@ -169,7 +169,7 @@ public class dataManager {
         for (User user : userList) {
             if (user.getId().equals(id)) return user;
         }
-        System.out.println(" Không tìm thấy User !");
+        System.out.println(" Not found User !");
         return null;
     }
 
@@ -177,7 +177,7 @@ public class dataManager {
         for (Book book : bookList) {
             if (book.getId().equals(id)) return book;
         }
-        System.out.println(" Không tìm thây sách !");
+        System.out.println(" Not found Book !");
         return null;
     }
 
@@ -197,7 +197,7 @@ public class dataManager {
             }
 
         }catch (Exception e){
-            System.out.println("Không thể đọc file sách: " + e.getMessage());
+            System.out.println("Can't read file book : " + e.getMessage());
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader("file/user.txt"))) {
@@ -213,10 +213,10 @@ public class dataManager {
             }
 
         }catch (Exception e){
-            System.out.println(" Không thể đoc file user: " + e.getMessage());
+            System.out.println(" Can't read file user: " + e.getMessage());
         }
 
-        System.out.println("Đã load dữ liệu từ file.");
+        System.out.println("Loading from file is done.");
     }
 
 
