@@ -7,7 +7,7 @@ public class User {
     private String id;
     private String name;
     private String email;
-    private ArrayList<Book> borrowedBookList = new ArrayList<>();
+    private final ArrayList<Book> borrowedBookList = new ArrayList<>();
 
     public User(String id, String name, String email) {
         this.id = id;

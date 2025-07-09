@@ -1,0 +1,3 @@
+01;quy_an_1;asss;quaa;false
+02;truyenma;truong;tamlinh;true
+03;truyencuoi;tuyet;tamlinh;true

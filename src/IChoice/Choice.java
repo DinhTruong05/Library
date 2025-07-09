@@ -10,6 +10,8 @@ public interface Choice {
     int returnedBook = 7;
     int displayBookList = 8;
     int showStatistics = 9;
+    int exportBorrowBookToFile = 10;
+    int exportAvailableBooksToFile = 11;
     int exit = 0;
 
 }
