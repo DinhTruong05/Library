@@ -28,8 +28,8 @@ public class DataManager {
         String author = scanner.nextLine();
         System.out.println("Input category");
         String category = scanner.nextLine();
-        System.out.println("Input available");
-        boolean available = scanner.nextLine().equals("true");
+        System.out.println("Is the book available? (true/false)");
+        boolean available = Boolean.parseBoolean(scanner.nextLine().trim().toLowerCase());
         Book book = new Book(id, title, author, category, available);
         bookList.add(book);
         DataManager.saveToFile();
@@ -132,10 +132,13 @@ public class DataManager {
         user.removeBorrowedBook(bookId);
 
         Book book = findBook(bookId);
-        if (book == null) book.setAvailable(true);
+
+        if (book != null) book.setAvailable(true);
         saveToFile();
         System.out.println("Return book done.");
     }
+
+
 
     public static void displayBookList() {
 
@@ -168,17 +171,16 @@ public class DataManager {
         try (PrintWriter bw = new PrintWriter("file/borrowBook.txt")) {
             for (User user : userList) {
                 List<Book> borrowedBookList = user.getBorrowedBookList();
-                if (!borrowedBookList.isEmpty()) {
-                    bw.println(user.getId());
-
-                    for (Book book : borrowedBookList) {
-                        bw.println(user.getId() + ";"
-                                + book.getId());
-                    }
+                if (borrowedBookList.isEmpty()) {
+                    System.out.println("No book borrowed " );
+                    continue;
                 }
-
+                for (Book book : borrowedBookList) {
+                    bw.println(user.getId() + ";" + user.getName() + ";"
+                            + book.getId() + ";" + book.getTitle());
+                    }
             }
-            System.out.println("Borrowed book details exported to file/borrowed.txt");
+            System.out.println("Borrowed book details exported to file/borrowBook.txt");
         } catch (Exception e) {
             System.out.println("Error input file borrowBook" + e.getMessage());
         }

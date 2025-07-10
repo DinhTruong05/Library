@@ -56,7 +56,7 @@ public class User {
 
     public void removeBorrowedBook(String bookId) {
         for (Book book : borrowedBookList) {
-            if (book.getId().equals(book.getId())) {
+            if (book.getId().equals(bookId)) {
                 borrowedBookList.remove(book);
                 book.setAvailable(true);
                 System.out.println("Successfully returned the book");

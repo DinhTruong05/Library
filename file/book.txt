@@ -1,3 +1,5 @@
-01;quy_an_1;asss;quaa;false
+01;quy_an_1;asss;quaa;true
 02;truyenma;truong;tamlinh;true
 03;truyencuoi;tuyet;tamlinh;true
+04;truyentienhiep;myseft;vientuong;true
+05;tutien;vỉnhau;tienhiep;true
